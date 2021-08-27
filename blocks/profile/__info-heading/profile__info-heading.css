@@ -1,0 +1,19 @@
+.profile__info-heading {
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 16px;
+  display: inline;
+}
+
+@media screen and (max-width: 580px) {
+  .profile__info-heading {
+    font-size: 22px;
+    line-height: 27px;
+  }
+}
