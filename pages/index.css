@@ -3,8 +3,8 @@
 /* fonts */
 @import url(../fonts/inter.css);
 /* hover effect */
-@import url(../blocks/hover/_06/hover_06.css);
-@import url(../blocks/hover/_08/hover_08.css);
+@import url(../blocks/hover/_opacity/hover_opacity_06.css);
+@import url(../blocks/hover/_opacity/hover_opacity_08.css);
 /* page */
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/__container/page__container.css);
