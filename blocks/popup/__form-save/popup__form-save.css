@@ -15,3 +15,8 @@
   transition: 0.3s;
   margin-top: 54px;
 }
+
+.popup__form-save:hover {
+  opacity: 0.8;
+  transition: 0.3s;
+}
