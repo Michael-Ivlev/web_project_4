@@ -11,28 +11,36 @@
     <div class="page">
       <div class="page__container">
         <div class="popup">
+          <button class="popup__close hover_06" type="button"></button>
           <div class="popup__container">
-            <button class="popup__close hover" type="button"></button>
-            <form class="popup__form">
+            <form class="popup__form" name="popup-form">
               <h2 class="popup__form-heading">Edit profile</h2>
               <input
-                class="popup__form-name"
+              name="popup-name-input"
+                class="popup__form-input"
+                id="popup__form-input_name"
                 type="text"
                 placeholder="Jacques Cousteau"
                 required
               />
               <input
-                class="popup__form-job"
+              id="popup__form-input_job"
+                name="popup-job-input"
+                class="popup__form-input"
                 type="text"
                 placeholder="Explorer"
                 required
               />
-              <button class="popup__form-save hover" type="submit">Save</button>
+              <button class="popup__form-save hover_08" type="submit">Save</button>
             </form>
           </div>
         </div>
         <header class="header">
-          <img class="logo" src="./images/logo.svg" alt="Around The U.S. logo" />
+          <img
+            class="logo"
+            src="./images/logo.svg"
+            alt="Around The U.S. logo"
+          />
         </header>
         <main class="main">
           <section class="profile">
@@ -44,11 +52,11 @@
               />
               <div class="profile__info">
                 <h1 class="profile__info-heading">Jacques Cousteau</h1>
-                <button class="profile__info-edit hover"></button>
+                <button type="button" class="profile__info-edit hover_06"></button>
                 <p class="profile__info-description">Explorer</p>
               </div>
             </div>
-            <button class="profile__add-button hover"></button>
+            <button type="button" class="profile__add-button hover_06"></button>
           </section>
           <section class="elements">
             <div class="element">
@@ -59,15 +67,11 @@
               />
               <div class="element__container">
                 <h2 class="element__container-heading">Yosemite Valley</h2>
-                <label class="heartCheckBox" for="heartCheckBox0">
-                  <input
-                    class="heartCheckBox__input"
-                    type="checkbox"
-                    name="heartCheckBox"
-                    id="heartCheckBox0"
-                  />
-                  <span class="heartCheckBox__box hover"></span>
-                </label>
+                <button
+                  class="heart-button"
+                  type="button"
+                  name="heart-button"
+                ></button>
               </div>
             </div>
             <div class="element">
@@ -78,15 +82,11 @@
               />
               <div class="element__container">
                 <h2 class="element__container-heading">Lake Louise</h2>
-                <label class="heartCheckBox" for="heartCheckBox1">
-                  <input
-                    class="heartCheckBox__input"
-                    type="checkbox"
-                    name="heartCheckBox"
-                    id="heartCheckBox1"
-                  />
-                  <span class="heartCheckBox__box hover"></span>
-                </label>
+                <button
+                class="heart-button"
+                type="button"
+                name="heart-button"
+              ></button>
               </div>
             </div>
             <div class="element">
@@ -97,15 +97,11 @@
               />
               <div class="element__container">
                 <h2 class="element__container-heading">Bald Mountains</h2>
-                <label class="heartCheckBox" for="heartCheckBox2">
-                  <input
-                    class="heartCheckBox__input"
-                    type="checkbox"
-                    name="heartCheckBox"
-                    id="heartCheckBox2"
-                  />
-                  <span class="heartCheckBox__box hover"></span>
-                </label>
+                <button
+                  class="heart-button"
+                  type="button"
+                  name="heart-button"
+                ></button>
               </div>
             </div>
             <div class="element">
@@ -116,15 +112,11 @@
               />
               <div class="element__container">
                 <h2 class="element__container-heading">Latemar</h2>
-                <label class="heartCheckBox" for="heartCheckBox3">
-                  <input
-                    class="heartCheckBox__input"
-                    type="checkbox"
-                    name="heartCheckBox"
-                    id="heartCheckBox3"
-                  />
-                  <span class="heartCheckBox__box hover"></span>
-                </label>
+                <button
+                  class="heart-button"
+                  type="button"
+                  name="heart-button"
+                ></button>
               </div>
             </div>
             <div class="element">
@@ -135,15 +127,11 @@
               />
               <div class="element__container">
                 <h2 class="element__container-heading">Vanoise Nationa...</h2>
-                <label class="heartCheckBox" for="heartCheckBox4">
-                  <input
-                    class="heartCheckBox__input"
-                    type="checkbox"
-                    name="heartCheckBox"
-                    id="heartCheckBox4"
-                  />
-                  <span class="heartCheckBox__box hover"></span>
-                </label>
+                <button
+                class="heart-button"
+                type="button"
+                name="heart-button"
+              ></button>
               </div>
             </div>
             <div class="element">
@@ -154,15 +142,11 @@
               />
               <div class="element__container">
                 <h2 class="element__container-heading">Lago di Braies</h2>
-                <label class="heartCheckBox" for="heartCheckBox5">
-                  <input
-                    class="heartCheckBox__input"
-                    type="checkbox"
-                    name="heartCheckBox"
-                    id="heartCheckBox5"
-                  />
-                  <span class="heartCheckBox__box hover"></span>
-                </label>
+                <button
+                  class="heart-button"
+                  type="button"
+                  name="heart-button"
+                ></button>
               </div>
             </div>
           </section>

@@ -3,21 +3,19 @@
 /* fonts */
 @import url(../fonts/inter.css);
 /* hover effect */
-@import url(../blocks/hover/hover.css);
+@import url(../blocks/hover/_06/hover_06.css);
+@import url(../blocks/hover/_08/hover_08.css);
 /* page */
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/__container/page__container.css);
 /* popup */
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/__open/popup__open.css);
-@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__form-save/popup__form-save.css);
-@import url(../blocks/popup/__form-name/popup__form-name.css);
-@import url(../blocks/popup/__form-job/popup__form-job.css);
+@import url(../blocks/popup/__form-input/popup__form-input.css);
 @import url(../blocks/popup/__form-heading/popup__form-heading.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close/popup__close.css);
-@import url(../blocks/popup/__open/popup__open.css);
+@import url(../blocks/popup/_open/popup_open.css);
 /* header */
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
@@ -37,12 +35,9 @@
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__container/element__container.css);
-@import url(../blocks/element/__container-heart/element__container-heart.css);
 @import url(../blocks/element/__container-heading/element__container-heading.css);
-/* heartcheckbox */
-@import url(../blocks/heartCheckBox/heartCheckBox.css);
-@import url(../blocks/heartCheckBox/__input/heartCheckBox__input.css);
-@import url(../blocks/heartCheckBox/__box/heartCheckBox__box.css);
+/* heart-button */
+@import url(../blocks/heart-button/heart-button.css);
 /* footer */
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/footer/footer.css);
