@@ -4,9 +4,6 @@
   align-items: center;
   padding-top: 35px;
   padding-bottom: 45px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 @media screen and (max-width: 580px) {

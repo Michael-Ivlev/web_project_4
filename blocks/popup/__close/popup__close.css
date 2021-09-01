@@ -9,7 +9,7 @@
   cursor: pointer;
   opacity: 1;
   transition: 0.3s;
-  margin-left: 550px;
+  margin-left: 510px;
 }
 
 @media screen and (max-width: 580px) {
