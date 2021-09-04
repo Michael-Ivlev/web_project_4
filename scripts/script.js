@@ -49,6 +49,7 @@ closePopupBtn.addEventListener("click", closePopup);
 // image script part
 const elementTemplate = document.querySelector("#element-template").content;
 const elementsSection = document.querySelector(".elements");
+const titleInput = document.querySelector("#newplace__form-input_title");
 
 const initialCards = [
   {
@@ -86,13 +87,22 @@ for (let i = 0; i < initialCards.length; i++) {
   elementsSection.append(initialElement);
 }
 
+// Pop up new place 
+const newplace = document.querySelector(".newplace");
+const profileAddButton = document.querySelector(".profile__add-button");
+const newPlaceDiv = document.querySelector(".newplace");
+const newplaceCloseButton = document.querySelector(".newplace__close");
 
+function newPlaceOpen() {
 
+newplace.classList.add("newplace_open");
 
-    // initialCards.forEach(element => {
-    //   initialElement1.querySelector(".element__img").src = initialCards[0].link;
-    //   initialElement1.querySelector(".element__container-heading").textContent = initialCards[0].name;
-    //   elementsSection.append(initialElement1);
-    // });
-    // console.log(elementTemplate);
-    // console.log(initialCards[0].name);
+ 
+}
+
+ function newPlaceClose() {
+  newplace.classList.remove("newplace_open");
+}
+
+profileAddButton.addEventListener("click", newPlaceOpen);
+newplaceCloseButton.addEventListener("click", newPlaceClose);

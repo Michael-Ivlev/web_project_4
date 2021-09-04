@@ -15,6 +15,14 @@
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/_open/popup_open.css);
+/* newplace */
+@import url(../blocks/newplace/newplace.css);
+@import url(../blocks/newplace/__form-save/newplace__form-save.css);
+@import url(../blocks/newplace/__form-input/newplace__form-input.css);
+@import url(../blocks/newplace/__form-heading/newplace__form-heading.css);
+@import url(../blocks/newplace/__container/newplace__container.css);
+@import url(../blocks/newplace/__close/newplace__close.css);
+@import url(../blocks/newplace/_open/newplace_open.css);
 /* header */
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
