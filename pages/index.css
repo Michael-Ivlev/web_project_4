@@ -44,8 +44,10 @@
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__container/element__container.css);
 @import url(../blocks/element/__container-heading/element__container-heading.css);
+@import url(../blocks/element/__delete/element__delete.css);
 /* heart-button */
 @import url(../blocks/heart-button/heart-button.css);
+@import url(../blocks/heart-button/_active/heart-button_active.css);
 /* footer */
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/footer/footer.css);

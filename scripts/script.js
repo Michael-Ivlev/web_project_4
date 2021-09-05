@@ -50,7 +50,8 @@ closePopupBtn.addEventListener("click", closePopup);
 const elementTemplate = document.querySelector("#element-template").content;
 const elementsSection = document.querySelector(".elements");
 const titleInput = document.querySelector("#newplace__form-input_title");
-
+const imgurlInput = document.querySelector("#newplace__form-input_imgurl");
+const newPlaceForm = document.querySelector(".newplace__form");
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -78,6 +79,19 @@ const initialCards = [
   }
 ];
 
+function handleFormNewplaceSubmit(event) {
+  event.preventDefault();
+  const initialElement = elementTemplate.querySelector(".element").cloneNode(true);
+  initialCards.push(
+  {
+    name: titleInput.value,
+    link: imgurlInput.value
+  });
+  initialElement.querySelector(".element__img").src = initialCards[initialCards.length - 1].link;
+  initialElement.querySelector(".element__container-heading").textContent = initialCards[initialCards.length - 1].name;
+  elementsSection.prepend(initialElement);
+}
+
 
 for (let i = 0; i < initialCards.length; i++) {
   const initialElement = elementTemplate.querySelector(".element").cloneNode(true);
@@ -86,6 +100,8 @@ for (let i = 0; i < initialCards.length; i++) {
   initialElement.querySelector(".element__container-heading").textContent = initialCards[i].name;
   elementsSection.append(initialElement);
 }
+
+newPlaceForm.addEventListener("submit", handleFormNewplaceSubmit);
 
 // Pop up new place 
 const newplace = document.querySelector(".newplace");
@@ -106,3 +122,31 @@ newplace.classList.add("newplace_open");
 
 profileAddButton.addEventListener("click", newPlaceOpen);
 newplaceCloseButton.addEventListener("click", newPlaceClose);
+
+// heart button
+const heartButton = document.querySelectorAll(".heart-button");
+heartButton.forEach(element => element.addEventListener("click", function (evt) {
+  evt.target.classList.toggle("heart-button_active");
+}));
+
+// delete button
+const deleteButton = document.querySelectorAll(".element__delete");
+deleteButton.forEach(element => element.addEventListener("click", function(evt) {
+  let elementLink = evt.target.parentElement.querySelector(".element__img").src;
+  const element = evt.target.parentElement;
+
+  let index = -1;
+  for(var i=0; i<initialCards.length; i++) {
+	  if(initialCards[i].link == elementLink) {
+		index = i;
+    initialCards.splice(i, 1);
+	}
+} 
+  element.remove();
+}));
+
+// deleteButton.forEach(element => element.addEventListener("click", function (evt) {
+//   const initialElement = document.querySelector(".elements");
+//   initialElement.children.classList.add("element__delete");
+//   console.log(initialElement.children);
+// }));
