@@ -7,7 +7,7 @@ let name = document.querySelector(".profile__info-heading");
 let job = document.querySelector(".profile__info-description");
 let nameInput = document.querySelector("#popup__form-input_name");
 let jobInput = document.querySelector("#popup__form-input_job");
-
+const pageContainer = document.querySelector(".page__container");
 
 
 function openPopup() {
@@ -144,6 +144,17 @@ deleteButton.forEach(element => element.addEventListener("click", function(evt) 
 } 
   element.remove();
 }));
+
+// image popup
+const imageElement = document.querySelectorAll(".element__img");
+const imagePopupTemplate = document.querySelector("#image-popup-template").content;
+const initialPopupTemplate = imagePopupTemplate.querySelector(".image-popup");
+  imageElement.forEach (element => element.addEventListener("click", function (evt) {
+    console.log(imagePopupTemplate)
+    pageContainer.prepend(imagePopupTemplate);
+}))
+
+
 
 // deleteButton.forEach(element => element.addEventListener("click", function (evt) {
 //   const initialElement = document.querySelector(".elements");
