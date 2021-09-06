@@ -90,7 +90,26 @@ function handleFormNewplaceSubmit(event) {
   initialElement.querySelector(".element__img").src = initialCards[initialCards.length - 1].link;
   initialElement.querySelector(".element__container-heading").textContent = initialCards[initialCards.length - 1].name;
   elementsSection.prepend(initialElement);
-}
+  // heart button on a new element
+    const heartButton = initialElement.querySelector(".heart-button").addEventListener("click", function (evt) {
+      evt.target.classList.toggle("heart-button_active");
+    });
+  // delete button on a new element
+    const deleteButton = document.querySelector(".element__delete").addEventListener("click", function(evt) {
+      let elementLink = evt.target.parentElement.querySelector(".element__img").src;
+      const element = evt.target.parentElement;
+    
+      let index = -1;
+      for(var i=0; i<initialCards.length; i++) {
+        if(initialCards[i].link == elementLink) {
+        index = i;
+        initialCards.splice(i, 1);
+      }
+    } 
+      element.remove();
+    });
+    imagePopup ();
+};
 
 
 for (let i = 0; i < initialCards.length; i++) {
@@ -99,7 +118,7 @@ for (let i = 0; i < initialCards.length; i++) {
   initialElement.querySelector(".element__img").alt = initialCards[i].name;
   initialElement.querySelector(".element__container-heading").textContent = initialCards[i].name;
   elementsSection.append(initialElement);
-}
+};
 
 newPlaceForm.addEventListener("submit", handleFormNewplaceSubmit);
 
@@ -114,11 +133,11 @@ function newPlaceOpen() {
 newplace.classList.add("newplace_open");
 
  
-}
+};
 
  function newPlaceClose() {
   newplace.classList.remove("newplace_open");
-}
+};
 
 profileAddButton.addEventListener("click", newPlaceOpen);
 newplaceCloseButton.addEventListener("click", newPlaceClose);
@@ -146,18 +165,18 @@ deleteButton.forEach(element => element.addEventListener("click", function(evt) 
 }));
 
 // image popup
+function imagePopup () {
 const imageElement = document.querySelectorAll(".element__img");
 const imagePopupTemplate = document.querySelector("#image-popup-template").content;
 const initialPopupTemplate = imagePopupTemplate.querySelector(".image-popup");
   imageElement.forEach (element => element.addEventListener("click", function (evt) {
-    console.log(imagePopupTemplate)
-    pageContainer.prepend(imagePopupTemplate);
-}))
-
-
-
-// deleteButton.forEach(element => element.addEventListener("click", function (evt) {
-//   const initialElement = document.querySelector(".elements");
-//   initialElement.children.classList.add("element__delete");
-//   console.log(initialElement.children);
-// }));
+    pageContainer.prepend(initialPopupTemplate);
+    const popupImage = evt.target.src;
+    initialPopupTemplate.querySelector(".image-popup__image").src = popupImage;
+    console.log(popupImage);
+    const popupCloseButton = document.querySelector(".image-popup__close").addEventListener("click", function () {
+      const imagepopup = document.querySelector(".image-popup");
+      imagepopup.remove();
+    });
+}));
+};
