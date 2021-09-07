@@ -4,6 +4,7 @@
 @import url(../fonts/inter.css);
 /* hover effect */
 @import url(../blocks/hover/hover.css);
+@import url(../blocks/smooth/smooth.css);
 /* page */
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/__container/page__container.css);
@@ -48,7 +49,13 @@
 /* heart-button */
 @import url(../blocks/heart-button/heart-button.css);
 @import url(../blocks/heart-button/_active/heart-button_active.css);
+/* image-popup */
+@import url(../blocks/image-popup/image-popup.css);
+@import url(../blocks/image-popup/__container/image-popup__container.css);
+@import url(../blocks/image-popup/__name/image-popup__name.css);
+@import url(../blocks/image-popup/__close/image-popup__close.css);
+@import url(../blocks/image-popup/__image/image-popup__image.css);
+@import url(../blocks/image-popup/_open/image-popup_open.css);
 /* footer */
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/footer/footer.css);
-

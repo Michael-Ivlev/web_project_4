@@ -1,129 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Around The U.S.</title>
-    <link rel="stylesheet" href="./pages/index.css" />
-  </head>
-  <body>
-    <div class="page">
-      <div class="page__container">
-        <div class="popup">
-          <button class="popup__close hover" type="button"></button>
-          <div class="popup__container">
-            <form class="popup__form" name="popup-form">
-              <h2 class="popup__form-heading">Edit profile</h2>
-              <input
-                name="popup-name-input"
-                class="popup__form-input"
-                id="popup__form-input_name"
-                type="text"
-                placeholder="Jacques Cousteau"
-                required
-              />
-              <input
-                id="popup__form-input_job"
-                name="popup-job-input"
-                class="popup__form-input"
-                type="text"
-                placeholder="Explorer"
-                required
-              />
-              <button class="popup__form-save" type="submit">Save</button>
-            </form>
-          </div>
-        </div>
-        <div class="newplace">
-          <button class="newplace__close hover" type="button"></button>
-          <div class="newplace__container">
-            <form class="newplace__form" name="newplace-form">
-              <h2 class="newplace__form-heading">New place</h2>
-              <input
-                name="newplace-title-input"
-                class="newplace__form-input"
-                id="newplace__form-input_title"
-                type="text"
-                placeholder="Title"
-                required
-              />
-              <input
-                id="newplace__form-input_imgurl"
-                name="newplace-imgurl-input"
-                class="newplace__form-input"
-                type="text"
-                placeholder="Image link"
-                required
-              />
-              <button class="newplace__form-save" type="submit">Create</button>
-            </form>
-          </div>
-        </div>
-        <template id="image-popup-template">        
-          <div class="image-popup">
-          <button class="image-popup__close hover" type="button"></button>
-          <div class="image-popup__container">
-              <img class="image-popup__image" src="" alt="">
-              <h2 class="image-popup__name">asdasdddasdasdasdasd</h2>
-          </div>
-        </div>
-      </template>
 
-        <header class="header">
-          <img
-            class="logo"
-            src="./images/logo.svg"
-            alt="Around The U.S. logo"
-          />
-        </header>
-        <main class="main">
-          <section class="profile">
-            <div class="profile__container">
-              <img
-                class="profile__avatar"
-                src="./images/profile-avatar.jpg"
-                alt="profile avatar picture that describe the person"
-              />
-              <div class="profile__info">
-                <div class="profile__info-heading-container">
-                  <h1 class="profile__info-heading">Jacques Cousteau</h1>
-                  <button
-                    type="button"
-                    class="profile__info-edit hover"
-                  ></button>
-                </div>
-                <p class="profile__info-description">Explorer</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Around The U.S.</title>
+  <link rel="stylesheet" href="./pages/index.css" />
+</head>
+
+<body>
+  <div class="page">
+    <div class="page__container">
+      <div class="popup">
+        <button class="popup__close hover" type="button"></button>
+        <div class="popup__container">
+          <form class="popup__form" name="popup-form">
+            <h2 class="popup__form-heading">Edit profile</h2>
+            <input name="popup-name-input" class="popup__form-input" id="popup__form-input_name" type="text"
+              placeholder="Jacques Cousteau" required />
+            <input id="popup__form-input_job" name="popup-job-input" class="popup__form-input" type="text"
+              placeholder="Explorer" required />
+            <button class="popup__form-save" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+      <div class="newplace">
+        <button class="newplace__close hover" type="button"></button>
+        <div class="newplace__container">
+          <form class="newplace__form" name="newplace-form">
+            <h2 class="newplace__form-heading">New place</h2>
+            <input name="newplace-title-input" class="newplace__form-input" id="newplace__form-input_title" type="text"
+              placeholder="Title" required />
+            <input id="newplace__form-input_imgurl" name="newplace-imgurl-input" class="newplace__form-input"
+              type="text" placeholder="Image link" required />
+            <button class="newplace__form-save" type="submit">Create</button>
+          </form>
+        </div>
+      </div>
+      <div class="image-popup">
+        <div class="image-popup__container">
+          <button class="image-popup__close hover" type="button"></button>
+          <img class="image-popup__image" src="place-holder" alt="">
+
+          <h2 class="image-popup__name"></h2>
+        </div>
+      </div>
+
+
+      <header class="header">
+        <img class="logo" src="./images/logo.svg" alt="Around The U.S. logo" />
+      </header>
+      <main class="main">
+        <section class="profile">
+          <div class="profile__container">
+            <img class="profile__avatar" src="./images/profile-avatar.jpg"
+              alt="profile avatar picture that describe the person" />
+            <div class="profile__info">
+              <div class="profile__info-heading-container">
+                <h1 class="profile__info-heading">Jacques Cousteau</h1>
+                <button type="button" class="profile__info-edit hover"></button>
+              </div>
+              <p class="profile__info-description">Explorer</p>
+            </div>
+          </div>
+          <button type="button" class="profile__add-button hover"></button>
+        </section>
+        <section class="elements">
+          <template id="element-template">
+            <div class="element">
+              <button class="element__delete" type="button" name="element-delete-button"></button>
+              <img class="element__img" src="" alt="" />
+              <div class="element__container">
+                <h2 class="element__container-heading"></h2>
+                <button class="heart-button" type="button" name="heart-button"></button>
               </div>
             </div>
-            <button type="button" class="profile__add-button hover"></button>
-          </section>
-          <section class="elements">
-            <template id="element-template">
-              <div class="element">
-                <button class="element__delete" type="button" name="element-delete-button"></button>
-                <img
-                  class="element__img"
-                  src=""
-                  alt=""
-                />
-                <div class="element__container">
-                  <h2 class="element__container-heading"></h2>
-                  <button
-                    class="heart-button"
-                    type="button"
-                    name="heart-button"
-                  ></button>
-                </div>
-              </div>
-            </template>
-          </section>
-        </main>
-        <footer class="footer">
-          <p class="footer__copyright">© 2021 Around The U.S.</p>
-        </footer>
-      </div>
+          </template>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">© 2021 Around The U.S.</p>
+      </footer>
     </div>
-    <script src="./scripts/script.js"></script>
-  </body>
+  </div>
+  <script src="./scripts/script.js"></script>
+</body>
+
 </html>
