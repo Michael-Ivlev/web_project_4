@@ -174,7 +174,6 @@ const InitialimageElementsPopup = document.querySelectorAll(".element__img");
 InitialimageElementsPopup.forEach(element => element.addEventListener("click", function (evt) {
   const imageLink = evt.target.src;
   const imageAlt = evt.target.alt;
-  console.log(evt.target.src)
   openImagePopup(imageLink, imageAlt);
 }));
 
@@ -188,49 +187,3 @@ function openImagePopup(image, title) {
   imagePopUp.querySelector(".image-popup__image").src = image;
   imagePopUp.querySelector(".image-popup__name").textContent = title;
 };
-// const imageElement = document.querySelectorAll(".element__img");
-// const imagePopupTemplate = document.querySelector("#image-popup-template").content;
-// const initialPopupTemplate = imagePopupTemplate.querySelector(".image-popup");
-//   imageElement.forEach (element => element.addEventListener("click", function (evt) {
-//     pageContainer.prepend(initialPopupTemplate);
-//     const popupImage = evt.target.src;
-//     const popupHeading = evt.target.alt;
-//     initialPopupTemplate.querySelector(".image-popup__image").src = popupImage;
-//     initialPopupTemplate.querySelector(".image-popup__name").textContent = popupHeading;
-//     console.log(popupHeading);
-//     const popupCloseButton = document.querySelector(".image-popup__close").addEventListener("click", function () {
-//       const imagepopup = document.querySelector(".image-popup");
-//       imagepopup.remove();
-//     });
-// }));
-// function popupimage (){
-//   const imageElement = document.querySelector(".element__img");
-//   const imagePopupTemplate = document.querySelector("#image-popup-template").content;
-//   const initialPopupTemplate = imagePopupTemplate.querySelector(".image-popup");
-//     imageElement.addEventListener("click", function (evt) {
-//       pageContainer.prepend(initialPopupTemplate);
-//       const popupImage = evt.target.src;
-//       const popupHeading = evt.target.alt;
-//       initialPopupTemplate.querySelector(".image-popup__name").textContent = popupHeading;
-//       initialPopupTemplate.querySelector(".image-popup__image").src = popupImage;
-//       console.log(popupImage);
-//       const popupCloseButton = document.querySelector(".image-popup__close").addEventListener("click", function () {
-//         const imagepopup = document.querySelector(".image-popup");
-//         imagepopup.remove();
-//       });
-//   });
-//   }
-
-// function imagePopup (evt) {
-// const imageElement = document.querySelector(".element__img");
-// const imagePopupTemplate = document.querySelector("#image-popup-template").content;
-// const initialPopupTemplate = imagePopupTemplate.querySelector(".image-popup");
-//     pageContainer.prepend(initialPopupTemplate);
-//     const popupImage = evt.target.src;
-//     initialPopupTemplate.querySelector(".image-popup__image").src = popupImage;
-//     console.log(popupImage);
-//     const popupCloseButton = document.querySelector(".image-popup__close").addEventListener("click", function () {
-//       const imagepopup = document.querySelector(".image-popup");
-//       imagepopup.remove();
-//     });
-// };
