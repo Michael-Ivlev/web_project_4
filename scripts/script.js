@@ -1,24 +1,36 @@
 // popup script part
-let profileInfoEditBtn = document.querySelector(".profile__info-edit");
-let popup = document.querySelector(".popup");
-let closePopupBtn = document.querySelector(".popup__close");
-let formElement = document.querySelector(".popup__form");
-let name = document.querySelector(".profile__info-heading");
-let job = document.querySelector(".profile__info-description");
-let nameInput = document.querySelector("#popup__form-input_name");
-let jobInput = document.querySelector("#popup__form-input_job");
+const profileInfoEditBtn = document.querySelector(".profile__info-edit");
+const profilePopup = document.querySelector(".popup-profile");
+const closePopupBtn = document.querySelector(".popup-profile__close");
+const formElement = document.querySelector(".popup-profile__form");
+const name = document.querySelector(".profile__info-heading");
+const job = document.querySelector(".profile__info-description");
+const imagePopUp = document.querySelector(".popup-image");
+const imageClose = document.querySelector(".popup-image__close");
+const profileInputName = document.querySelector(
+  "#popup-profile__form-input_name"
+);
+const profileInputJob = document.querySelector(
+  "#popup-profile__form-input_job"
+);
 const pageContainer = document.querySelector(".page__container");
 
-
-function openPopup() {
+function openPopup(popup) {
   popup.classList.add("popup_open");
-  nameInput.value = name.textContent;
-  jobInput.value = job.textContent;
 }
 
-function closePopup() {
-
+function closePopup(popup) {
   popup.classList.remove("popup_open");
+}
+
+function openProfilePopup() {
+  openPopup(profilePopup);
+  profileInputName.value = name.textContent;
+  profileInputJob.value = job.textContent;
+}
+
+function closeProfilePopup() {
+  closePopup(profilePopup);
 }
 
 function handleFormSubmit(evt) {
@@ -26,164 +38,110 @@ function handleFormSubmit(evt) {
   // Having done so, we can define our own way of submitting the form.
   // We'll explain it in more detail later.
 
-
-
-  name.textContent = nameInput.value;
-  job.textContent = jobInput.value;
-
-  popup.classList.remove("popup_open");
-  // Get the values of each field from the corresponding value property
-
-  // Select elements where the field values will be entered
-
-  // Insert new values using the textContent property of the querySelector() method
+  name.textContent = profileInputName.value;
+  job.textContent = profileInputJob.value;
 }
 
-// Connect the handler to the form:
-// it will watch the submit event
-formElement.addEventListener('submit', handleFormSubmit);
-profileInfoEditBtn.addEventListener("click", openPopup);
-closePopupBtn.addEventListener("click", closePopup);
-
+formElement.addEventListener("submit", handleFormSubmit);
+profileInfoEditBtn.addEventListener("click", openProfilePopup);
+closePopupBtn.addEventListener("click", closeProfilePopup);
 
 // image script part
 const elementTemplate = document.querySelector("#element-template").content;
 const elementsSection = document.querySelector(".elements");
-const titleInput = document.querySelector("#newplace__form-input_title");
-const imgurlInput = document.querySelector("#newplace__form-input_imgurl");
-const newPlaceForm = document.querySelector(".newplace__form");
+const titleInput = document.querySelector("#popup-card__form-input_title");
+const imgurlInput = document.querySelector("#popup-card__form-input_imgurl");
+const newPlaceForm = document.querySelector(".popup-card__form");
 const initialCards = [
   {
     name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
   },
   {
     name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
   },
   {
     name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
   },
   {
     name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
   },
   {
     name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
   },
   {
     name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg"
-  }
+    link: "https://code.s3.yandex.net/web-code/lago.jpg",
+  },
 ];
+function createCard(name, link) {
+  const card = elementTemplate.querySelector(".element").cloneNode(true);
+  card.querySelector(".element__img").src = link;
+  card.querySelector(".element__img").alt = name;
+  card.querySelector(".element__container-heading").textContent = name;
+  // add heart button
+  const heartButton = card.querySelector(".heart-button");
+  heartButton.addEventListener("click", function (evt) {
+    evt.target.classList.toggle("heart-button_active");
+  });
+  // delete button
+  const deleteButton = card.querySelector(".element__delete");
+  deleteButton.addEventListener("click", function (evt) {
+    card.remove();
+  });
+  // image popup
+  const ElementImg = card.querySelector(".element__img");
+  ElementImg.addEventListener("click", function (evt) {
+    openPopup(imagePopUp);
+    imagePopUp.querySelector(".popup-image__image").src = evt.target.src;
+    imagePopUp.querySelector(".popup-image__name").textContent = evt.target.alt;
+  });
+  function closeImagePopup() {
+    closePopup(imagePopUp);
+  }
+  imageClose.addEventListener("click", closeImagePopup);
+  return card;
+}
+
+function renderCard(card) {
+  elementsSection.append(card);
+}
 
 function handleFormNewplaceSubmit(event) {
   event.preventDefault();
-  const initialElement = elementTemplate.querySelector(".element").cloneNode(true);
-  initialCards.push(
-    {
-      name: titleInput.value,
-      link: imgurlInput.value
-    });
-  initialElement.querySelector(".element__img").src = initialCards[initialCards.length - 1].link;
-  initialElement.querySelector(".element__img").alt = initialCards[initialCards.length - 1].name;
-  initialElement.querySelector(".element__container-heading").textContent = initialCards[initialCards.length - 1].name;
-  elementsSection.prepend(initialElement);
-  // heart button on a new element
-  const heartButton = initialElement.querySelector(".heart-button").addEventListener("click", function (evt) {
-    evt.target.classList.toggle("heart-button_active");
-  });
-  // delete button on a new element
-  const deleteButton = document.querySelector(".element__delete").addEventListener("click", function (evt) {
-    let elementLink = evt.target.parentElement.querySelector(".element__img").src;
-    const element = evt.target.parentElement;
+  initialCards.push({ name: titleInput.value, link: imgurlInput.value });
+  renderCard(
+    createCard(
+      initialCards[initialCards.length - 1].name,
+      initialCards[initialCards.length - 1].link
+    )
+  );
+}
 
-    let index = -1;
-    for (var i = 0; i < initialCards.length; i++) {
-      if (initialCards[i].link == elementLink) {
-        index = i;
-        initialCards.splice(i, 1);
-      }
-    }
-    element.remove();
-  });
-  const addImageElementPopup = initialElement.querySelector(".element__img").addEventListener("click", function (evt) {
-    const imageLink = evt.target.src;
-    const imageAlt = evt.target.alt;
-    openImagePopup(imageLink, imageAlt);
-  });
-};
-
-
-for (let i = 0; i < initialCards.length; i++) {
-  const initialElement = elementTemplate.querySelector(".element").cloneNode(true);
-  initialElement.querySelector(".element__img").src = initialCards[i].link;
-  initialElement.querySelector(".element__img").alt = initialCards[i].name;
-  initialElement.querySelector(".element__container-heading").textContent = initialCards[i].name;
-  elementsSection.append(initialElement);
-};
+initialCards.forEach((card) => {
+  card;
+  renderCard(createCard(card.name, card.link));
+});
 
 newPlaceForm.addEventListener("submit", handleFormNewplaceSubmit);
 
-// Pop up new place 
-const newplace = document.querySelector(".newplace");
+// Pop up Card
+const card = document.querySelector(".popup-card");
 const profileAddButton = document.querySelector(".profile__add-button");
-const newPlaceDiv = document.querySelector(".newplace");
-const newplaceCloseButton = document.querySelector(".newplace__close");
+const newPlaceDiv = document.querySelector(".popup-card");
+const cardCloseButton = document.querySelector(".popup-card__close");
 
-function newPlaceOpen() {
+function openCardPopup() {
+  openPopup(card);
+}
 
-  newplace.classList.add("newplace_open");
+function CloseCardPopup() {
+  closePopup(card);
+}
 
-
-};
-
-function newPlaceClose() {
-  newplace.classList.remove("newplace_open");
-};
-
-profileAddButton.addEventListener("click", newPlaceOpen);
-newplaceCloseButton.addEventListener("click", newPlaceClose);
-
-// heart button
-const heartButton = document.querySelectorAll(".heart-button");
-heartButton.forEach(element => element.addEventListener("click", function (evt) {
-  evt.target.classList.toggle("heart-button_active");
-}));
-
-// delete button
-const deleteButton = document.querySelectorAll(".element__delete");
-deleteButton.forEach(element => element.addEventListener("click", function (evt) {
-  let elementLink = evt.target.parentElement.querySelector(".element__img").src;
-  const element = evt.target.parentElement;
-
-  let index = -1;
-  for (var i = 0; i < initialCards.length; i++) {
-    if (initialCards[i].link == elementLink) {
-      index = i;
-      initialCards.splice(i, 1);
-    }
-  }
-  element.remove();
-}));
-
-
-const InitialimageElementsPopup = document.querySelectorAll(".element__img");
-InitialimageElementsPopup.forEach(element => element.addEventListener("click", function (evt) {
-  const imageLink = evt.target.src;
-  const imageAlt = evt.target.alt;
-  openImagePopup(imageLink, imageAlt);
-}));
-
-
-function openImagePopup(image, title) {
-  const imagePopUp = document.querySelector(".image-popup");
-  const imageClose = document.querySelector(".image-popup__close").addEventListener("click", function () {
-    imagePopUp.classList.remove("image-popup_open");
-  });
-  imagePopUp.classList.add("image-popup_open");
-  imagePopUp.querySelector(".image-popup__image").src = image;
-  imagePopUp.querySelector(".image-popup__name").textContent = title;
-};
+profileAddButton.addEventListener("click", openCardPopup);
+cardCloseButton.addEventListener("click", CloseCardPopup);
