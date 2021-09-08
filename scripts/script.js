@@ -113,7 +113,6 @@ function renderCard(card) {
 
 function handleFormNewplaceSubmit(event) {
   event.preventDefault();
-  initialCards.push({ name: titleInput.value, link: imgurlInput.value });
   renderCard(
     createCard(
       initialCards[initialCards.length - 1].name,
