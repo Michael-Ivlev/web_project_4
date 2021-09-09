@@ -2,7 +2,7 @@
 const profileInfoEditBtn = document.querySelector(".profile__info-edit");
 const profilePopup = document.querySelector(".popup-profile");
 const closePopupBtn = document.querySelector(".popup-profile__close");
-const formElement = document.querySelector(".popup-profile__form");
+const profileForm = document.querySelector(".popup-profile__form");
 const name = document.querySelector(".profile__info-heading");
 const job = document.querySelector(".profile__info-description");
 const imagePopUp = document.querySelector(".popup-image");
@@ -33,16 +33,17 @@ function closeProfilePopup() {
   closePopup(profilePopup);
 }
 
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault(); // This line stops the browser from submitting the form in the default way.
   // Having done so, we can define our own way of submitting the form.
   // We'll explain it in more detail later.
 
   name.textContent = profileInputName.value;
   job.textContent = profileInputJob.value;
+  closeProfilePopup();
 }
 
-formElement.addEventListener("submit", handleFormSubmit);
+profileForm.addEventListener("submit", handleProfileFormSubmit);
 profileInfoEditBtn.addEventListener("click", openProfilePopup);
 closePopupBtn.addEventListener("click", closeProfilePopup);
 
@@ -94,18 +95,18 @@ function createCard(name, link) {
     card.remove();
   });
   // image popup
-  const ElementImg = card.querySelector(".element__img");
-  ElementImg.addEventListener("click", function (evt) {
+  const elementImg = card.querySelector(".element__img");
+  elementImg.addEventListener("click", function (evt) {
     openPopup(imagePopUp);
     imagePopUp.querySelector(".popup-image__image").src = evt.target.src;
     imagePopUp.querySelector(".popup-image__name").textContent = evt.target.alt;
   });
-  function closeImagePopup() {
-    closePopup(imagePopUp);
-  }
-  imageClose.addEventListener("click", closeImagePopup);
   return card;
 }
+function closeImagePopup() {
+  closePopup(imagePopUp);
+}
+imageClose.addEventListener("click", closeImagePopup);
 
 function renderCard(card) {
   elementsSection.append(card);
@@ -115,10 +116,11 @@ function handleFormNewplaceSubmit(event) {
   event.preventDefault();
   renderCard(
     createCard(
-      initialCards[initialCards.length - 1].name,
-      initialCards[initialCards.length - 1].link
+      titleInput.value,
+      imgurlInput.value
     )
   );
+  CloseCardPopup();
 }
 
 initialCards.forEach((card) => {
