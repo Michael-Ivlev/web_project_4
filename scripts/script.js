@@ -2,7 +2,7 @@
 const profileInfoEditBtn = document.querySelector(".profile__info-edit");
 const profilePopup = document.querySelector(".popup-profile");
 const closePopupBtn = document.querySelector(".popup-profile__close");
-const profileForm = document.querySelector(".popup-profile__form");
+const Form = document.querySelector(".popup__form");
 const name = document.querySelector(".profile__info-heading");
 const job = document.querySelector(".profile__info-description");
 const imagePopUp = document.querySelector(".popup-image");
@@ -42,8 +42,9 @@ function handleProfileFormSubmit(evt) {
   job.textContent = profileInputJob.value;
   closeProfilePopup();
 }
-
-profileForm.addEventListener("submit", handleProfileFormSubmit);
+const popupElement = document.querySelector(".popup");
+popupElement.addEventListener("click", closeProfilePopup);
+Form.addEventListener("submit", handleProfileFormSubmit);
 profileInfoEditBtn.addEventListener("click", openProfilePopup);
 closePopupBtn.addEventListener("click", closeProfilePopup);
 
@@ -52,7 +53,7 @@ const elementTemplate = document.querySelector("#element-template").content;
 const elementsSection = document.querySelector(".elements");
 const titleInput = document.querySelector("#popup-card__form-input_title");
 const imgurlInput = document.querySelector("#popup-card__form-input_imgurl");
-const newPlaceForm = document.querySelector(".popup-card__form");
+const newPlaceForm = document.querySelector("#popup-card__form");
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -120,11 +121,10 @@ function handleFormNewplaceSubmit(event) {
       imgurlInput.value
     )
   );
-  CloseCardPopup();
+  closeCardPopup();
 }
 
 initialCards.forEach((card) => {
-  card;
   renderCard(createCard(card.name, card.link));
 });
 
@@ -140,9 +140,9 @@ function openCardPopup() {
   openPopup(card);
 }
 
-function CloseCardPopup() {
+function closeCardPopup() {
   closePopup(card);
 }
 
 profileAddButton.addEventListener("click", openCardPopup);
-cardCloseButton.addEventListener("click", CloseCardPopup);
+cardCloseButton.addEventListener("click", closeCardPopup);

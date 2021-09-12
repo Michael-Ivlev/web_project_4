@@ -1,4 +1,4 @@
-.popup-profile__form-input {
+.popup__input {
     font-family: Inter, sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -11,6 +11,6 @@
     width: 100%;
   }
 
-  .popup-profile__form-input:nth-child(3){
+  .popup__input:nth-child(3){
       margin-top: 30px;
   }

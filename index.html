@@ -13,25 +13,31 @@
         <div class="popup popup-profile">
           <button class="popup-profile__close hover" type="button"></button>
           <div class="popup-profile__container">
-            <form class="popup-profile__form" name="popup-profile-form">
+            <form class="popup__form" name="popup-profile-form" novalidate>
               <h2 class="popup-profile__form-heading">Edit profile</h2>
               <input
                 name="popup-profile-profile-name-input"
-                class="popup-profile__form-input"
+                class="popup__input"
                 id="popup-profile__form-input_name"
                 type="text"
                 placeholder="Jacques Cousteau"
                 required
+                minlength="2"
+                maxlength="40"
               />
+              <span id="popup-profile__form-input_name-error" class="popup__error"></span>
               <input
                 id="popup-profile__form-input_job"
                 name="popup-profile-job-input"
-                class="popup-profile__form-input"
+                class="popup__input"
                 type="text"
                 placeholder="Explorer"
                 required
+                minlength="2"
+                maxlength="200"
               />
-              <button class="popup-profile__form-save" type="submit">
+              <span id="popup-profile__form-input_job-error" class="popup__error"></span>
+              <button class="popup__button" type="submit">
                 Save
               </button>
             </form>
@@ -40,25 +46,29 @@
         <div class="popup popup-card">
           <button class="popup-card__close hover" type="button"></button>
           <div class="popup-card__container">
-            <form class="popup-card__form" name="popup-card-form">
+            <form class="popup__form" name="popup-card-form" id="popup-card__form" novalidate>
               <h2 class="popup-card__form-heading">New place</h2>
               <input
                 name="popup-card-title-input"
-                class="popup-card__form-input"
+                class="popup__input"
                 id="popup-card__form-input_title"
                 type="text"
                 placeholder="Title"
                 required
+                minlength="1"
+                maxlength="30"
               />
+              <span id="popup-card__form-input_title-error" class="popup__error"></span>
               <input
                 id="popup-card__form-input_imgurl"
                 name="popup-card-imgurl-input"
-                class="popup-card__form-input"
-                type="text"
+                class="popup__input"
+                type="url"
                 placeholder="Image link"
                 required
               />
-              <button class="popup-card__form-save" type="submit">
+              <span id="popup-card__form-input_imgurl-error" class="popup__error"></span>
+              <button class="popup__button" type="submit">
                 Create
               </button>
             </form>
@@ -127,5 +137,6 @@
       </div>
     </div>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
