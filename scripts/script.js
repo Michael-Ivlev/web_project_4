@@ -7,6 +7,8 @@ const name = document.querySelector(".profile__info-heading");
 const job = document.querySelector(".profile__info-description");
 const imagePopUp = document.querySelector(".popup-image");
 const imageClose = document.querySelector(".popup-image__close");
+const allPopupElements = document.querySelectorAll(".popup");
+
 const profileInputName = document.querySelector(
   "#popup-profile__form-input_name"
 );
@@ -17,6 +19,7 @@ const pageContainer = document.querySelector(".page__container");
 
 function openPopup(popup) {
   popup.classList.add("popup_open");
+  addKeyLisitnerToPopup();
 }
 
 function closePopup(popup) {
@@ -33,6 +36,32 @@ function closeProfilePopup() {
   closePopup(profilePopup);
 }
 
+function closeOverlay() {
+  closeProfilePopup();
+  closeImagePopup();
+  closeCardPopup();
+}
+
+function addKeyLisitnerToPopup (evt) {
+  document.addEventListener("keydown", isKeyEscape);
+  function isKeyEscape (evt) {
+    const key = evt.key;
+    if (evt.key === "Escape") {
+      closeOverlay();
+      document.removeEventListener("keydown", isKeyEscape);
+    }
+  }
+}
+
+
+const setEventLisitnerToPopup = allPopupElements.forEach((element) => {
+  element.addEventListener("mousedown", function (evt) {
+    if (evt.target.classList.contains("popup")) {
+      closeOverlay();
+    }
+  });
+});
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault(); // This line stops the browser from submitting the form in the default way.
   // Having done so, we can define our own way of submitting the form.
@@ -42,8 +71,7 @@ function handleProfileFormSubmit(evt) {
   job.textContent = profileInputJob.value;
   closeProfilePopup();
 }
-const popupElement = document.querySelector(".popup");
-popupElement.addEventListener("click", closeProfilePopup);
+
 Form.addEventListener("submit", handleProfileFormSubmit);
 profileInfoEditBtn.addEventListener("click", openProfilePopup);
 closePopupBtn.addEventListener("click", closeProfilePopup);
@@ -115,12 +143,7 @@ function renderCard(card) {
 
 function handleFormNewplaceSubmit(event) {
   event.preventDefault();
-  renderCard(
-    createCard(
-      titleInput.value,
-      imgurlInput.value
-    )
-  );
+  renderCard(createCard(titleInput.value, imgurlInput.value));
   closeCardPopup();
 }
 
