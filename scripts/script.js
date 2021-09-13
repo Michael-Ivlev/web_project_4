@@ -25,12 +25,11 @@ function closePopup(popup) {
   popup.classList.remove("popup_open");
 }
 
-const setEventLisitnerToPopupClose = allPopupCloseElements.forEach(element => {
-  element.addEventListener("click", closeOverlay);
-});
-
-
-
+const setEventLisitnerToPopupClose = allPopupCloseElements.forEach(
+  (element) => {
+    element.addEventListener("click", closeOverlay);
+  }
+);
 
 function openProfilePopup() {
   openPopup(profilePopup);
@@ -48,9 +47,9 @@ function closeOverlay() {
   closeCardPopup();
 }
 
-function addKeyLisitnerToPopup (evt) {
+function addKeyLisitnerToPopup(evt) {
   document.addEventListener("keydown", isKeyEscape);
-  function isKeyEscape (evt) {
+  function isKeyEscape(evt) {
     const key = evt.key;
     if (evt.key === "Escape") {
       closeOverlay();
@@ -58,7 +57,6 @@ function addKeyLisitnerToPopup (evt) {
     }
   }
 }
-
 
 const setEventLisitnerToPopup = allPopupElements.forEach((element) => {
   element.addEventListener("mousedown", function (evt) {
@@ -140,7 +138,6 @@ function createCard(name, link) {
 function closeImagePopup() {
   closePopup(imagePopUp);
 }
-
 
 function renderCard(card) {
   elementsSection.prepend(card);
