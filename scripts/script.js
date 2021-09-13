@@ -1,13 +1,12 @@
 // popup script part
 const profileInfoEditBtn = document.querySelector(".profile__info-edit");
 const profilePopup = document.querySelector(".popup-profile");
-const closePopupBtn = document.querySelector(".popup-profile__close");
 const Form = document.querySelector(".popup__form");
 const name = document.querySelector(".profile__info-heading");
 const job = document.querySelector(".profile__info-description");
 const imagePopUp = document.querySelector(".popup-image");
-const imageClose = document.querySelector(".popup-image__close");
 const allPopupElements = document.querySelectorAll(".popup");
+const allPopupCloseElements = document.querySelectorAll(".popup__close");
 
 const profileInputName = document.querySelector(
   "#popup-profile__form-input_name"
@@ -25,6 +24,13 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove("popup_open");
 }
+
+const setEventLisitnerToPopupClose = allPopupCloseElements.forEach(element => {
+  element.addEventListener("click", closeOverlay);
+});
+
+
+
 
 function openProfilePopup() {
   openPopup(profilePopup);
@@ -74,7 +80,6 @@ function handleProfileFormSubmit(evt) {
 
 Form.addEventListener("submit", handleProfileFormSubmit);
 profileInfoEditBtn.addEventListener("click", openProfilePopup);
-closePopupBtn.addEventListener("click", closeProfilePopup);
 
 // image script part
 const elementTemplate = document.querySelector("#element-template").content;
@@ -135,10 +140,10 @@ function createCard(name, link) {
 function closeImagePopup() {
   closePopup(imagePopUp);
 }
-imageClose.addEventListener("click", closeImagePopup);
+
 
 function renderCard(card) {
-  elementsSection.append(card);
+  elementsSection.prepend(card);
 }
 
 function handleFormNewplaceSubmit(event) {
@@ -147,7 +152,7 @@ function handleFormNewplaceSubmit(event) {
   closeCardPopup();
 }
 
-initialCards.forEach((card) => {
+initialCards.reverse().forEach((card) => {
   renderCard(createCard(card.name, card.link));
 });
 
@@ -168,4 +173,3 @@ function closeCardPopup() {
 }
 
 profileAddButton.addEventListener("click", openCardPopup);
-cardCloseButton.addEventListener("click", closeCardPopup);
