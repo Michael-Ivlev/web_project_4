@@ -11,13 +11,11 @@
 
 /* profile popup */
 @import url(../blocks/popup-profile/popup-profile.css);
-@import url(../blocks/popup-profile/__form-input/popup-profile__form-input.css);
 @import url(../blocks/popup-profile/__form-heading/popup-profile__form-heading.css);
 @import url(../blocks/popup-profile/__container/popup-profile__container.css);
 @import url(../blocks/popup-profile/__close/popup-profile__close.css);
 /* card popup */
 @import url(../blocks/popup-card/popup-card.css);
-@import url(../blocks/popup-card/__form-input/popup-card__form-input.css);
 @import url(../blocks/popup-card/__form-heading/popup-card__form-heading.css);
 @import url(../blocks/popup-card/__container/popup-card__container.css);
 @import url(../blocks/popup-card/__close/popup-card__close.css);
