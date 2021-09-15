@@ -59,7 +59,9 @@ function closeProfilePopup() {
 }
 
 function closePopupWithOverlay(event) {
-  closePopup(event.target);
+  if (event.target === event.currentTarget) {
+    closePopup(event.target);
+  }
 }
 
 function closePopupWithEsc(event) {
