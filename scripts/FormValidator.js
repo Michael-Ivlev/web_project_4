@@ -1,7 +1,7 @@
 export class FormValidator {
   constructor(settingObj, formElement) {
-    this.settingObj = settingObj;
-    this.formElement = formElement;
+    this._settingObj = settingObj;
+    this._formElement = formElement;
   }
   enableValidation() {
     const {
@@ -11,14 +11,14 @@ export class FormValidator {
       inactiveButtonClass,
       inputErrorClass,
       errorClass,
-    } = this.settingObj;
+    } = this._settingObj;
 
-    this.formElement.addEventListener(submitButtonSelector, (evt) => {
+    this._formElement.addEventListener(submitButtonSelector, (evt) => {
       evt.preventDefault();
     });
 
     this._setEventListeners(
-      this.formElement,
+      this._formElement,
       inputSelector,
       submitButtonSelector,
       inactiveButtonClass,
