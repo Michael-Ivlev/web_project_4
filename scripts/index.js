@@ -1,8 +1,11 @@
-import { Card } from "./Card";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+import { settingsObj } from "./settingsObj.js";
+import { initialCards } from "./initialCards.js";
 // popup script part
 const profileInfoEditBtn = document.querySelector(".profile__info-edit");
 const profilePopup = document.querySelector(".popup-profile");
-const profileForm = profilePopup.querySelector(".popup__form");
+const profileForm = profilePopup.querySelector("#popup-profile__form");
 const name = document.querySelector(".profile__info-heading");
 const job = document.querySelector(".profile__info-description");
 const imagePopUp = document.querySelector(".popup-image");
@@ -89,32 +92,6 @@ const elementsSection = document.querySelector(".elements");
 const titleInput = document.querySelector("#popup-card__form-input_title");
 const imgurlInput = document.querySelector("#popup-card__form-input_imgurl");
 const newPlaceForm = document.querySelector("#popup-card__form");
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-  },
-];
 
 initialCards.forEach((data) => {
   const cardInstance = new Card(data, "#element-template");
@@ -124,7 +101,7 @@ initialCards.forEach((data) => {
 
 function handleFormNewplaceSubmit(event) {
   event.preventDefault();
-  
+
   const data = {
     name: titleInput.value,
     link: imgurlInput.value,
@@ -155,3 +132,13 @@ function closeCardPopup() {
 }
 
 profileAddButton.addEventListener("click", openCardPopup);
+
+const newplaceFormInstance = new FormValidator(settingsObj, newPlaceForm);
+newplaceFormInstance.enableValidation();
+const ProfileFormInstance = new FormValidator(settingsObj, profileForm);
+ProfileFormInstance.enableValidation();
+
+export { openPopup };
+export { imagePopUp };
+export { popupImageImage };
+export { popupImageName };
