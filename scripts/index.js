@@ -1,3 +1,4 @@
+import { Card } from "./Card";
 // popup script part
 const profileInfoEditBtn = document.querySelector(".profile__info-edit");
 const profilePopup = document.querySelector(".popup-profile");
@@ -83,7 +84,7 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 profileInfoEditBtn.addEventListener("click", openProfilePopup);
 
 // image script part
-const elementTemplate = document.querySelector("#element-template").content;
+
 const elementsSection = document.querySelector(".elements");
 const titleInput = document.querySelector("#popup-card__form-input_title");
 const imgurlInput = document.querySelector("#popup-card__form-input_imgurl");
@@ -114,41 +115,24 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
-function createCard(name, link) {
-  const card = elementTemplate.querySelector(".element").cloneNode(true);
-  const cardImage = card.querySelector(".element__img");
-  cardImage.src = link;
-  cardImage.alt = name;
-  card.querySelector(".element__container-heading").textContent = name;
-  // add heart button
-  const heartButton = card.querySelector(".heart-button");
-  heartButton.addEventListener("click", function (evt) {
-    evt.target.classList.toggle("heart-button_active");
-  });
-  // delete button
-  const deleteButton = card.querySelector(".element__delete");
-  deleteButton.addEventListener("click", function (evt) {
-    card.remove();
-  });
-  // image popup
-  cardImage.addEventListener("click", function (evt) {
-    openPopup(imagePopUp);
-    popupImageImage.src = evt.target.src;
-    popupImageName.textContent = evt.target.alt;
-  });
-  return card;
-}
-function closeImagePopup() {
-  closePopup(imagePopUp);
-}
 
-function renderCard(card) {
-  elementsSection.prepend(card);
-}
+initialCards.forEach((data) => {
+  const cardInstance = new Card(data, "#element-template");
+  const cardElement = cardInstance.generateCard();
+  elementsSection.append(cardElement);
+});
 
 function handleFormNewplaceSubmit(event) {
   event.preventDefault();
-  renderCard(createCard(titleInput.value, imgurlInput.value));
+  
+  const data = {
+    name: titleInput.value,
+    link: imgurlInput.value,
+  };
+  const cardInstance = new Card(data, "#element-template");
+  const cardElement = cardInstance.generateCard();
+  elementsSection.prepend(cardElement);
+
   titleInput.value = "";
   imgurlInput.value = "";
   event.target
@@ -156,10 +140,6 @@ function handleFormNewplaceSubmit(event) {
     .classList.add("popup__button_disabled");
   closeCardPopup();
 }
-
-initialCards.reverse().forEach((card) => {
-  renderCard(createCard(card.name, card.link));
-});
 
 newPlaceForm.addEventListener("submit", handleFormNewplaceSubmit);
 
