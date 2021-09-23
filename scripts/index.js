@@ -18,21 +18,9 @@ const cardCloseButton = cardPopup.querySelector(".popup__close");
 const imageCloseButton = imagePopUp.querySelector(".popup__close");
 const allCloseButtons = document.querySelectorAll(".popup__close");
 
-allCloseButtons.forEach((element) => {
-  if (element === profileCloseButton) {
-    profileCloseButton.addEventListener("click", () =>
-      closePopup(profilePopup)
-    );
-  }
-  if (element === cardCloseButton) {
-    cardCloseButton.addEventListener("click", () => closePopup(cardPopup));
-  }
-  if (element === imageCloseButton) {
-    imageCloseButton.addEventListener("click", () => closePopup(imagePopUp));
-  } else {
-    return null;
-  }
-});
+profileCloseButton.addEventListener("click", () => closePopup(profilePopup));
+cardCloseButton.addEventListener("click", () => closePopup(cardPopup));
+imageCloseButton.addEventListener("click", () => closePopup(imagePopUp));
 
 const profileInputName = document.querySelector(
   "#popup-profile__form-input_name"
