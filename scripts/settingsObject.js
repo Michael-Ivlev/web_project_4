@@ -1,4 +1,4 @@
-const settingsObj = {
+const settingsObject = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
@@ -7,4 +7,4 @@ const settingsObj = {
   errorClass: "popup__error_visible",
 };
 
-export { settingsObj };
+export { settingsObject };

@@ -1,8 +1,9 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
-import { settingsObj } from "./settingsObj.js";
+import { settingsObject } from "./settingsObject.js";
 import { initialCards } from "./initialCards.js";
-// popup script part
+import { openPopup, closePopup } from "./utils.js";
+
 const profileInfoEditBtn = document.querySelector(".profile__info-edit");
 const profilePopup = document.querySelector(".popup-profile");
 const profileForm = profilePopup.querySelector("#popup-profile__form");
@@ -17,7 +18,7 @@ const cardCloseButton = cardPopup.querySelector(".popup__close");
 const imageCloseButton = imagePopUp.querySelector(".popup__close");
 const allCloseButtons = document.querySelectorAll(".popup__close");
 
-const addEventListenerToAllCrossBtns = allCloseButtons.forEach((element) => {
+allCloseButtons.forEach((element) => {
   if (element === profileCloseButton) {
     profileCloseButton.addEventListener("click", () =>
       closePopup(profilePopup)
@@ -32,25 +33,16 @@ const addEventListenerToAllCrossBtns = allCloseButtons.forEach((element) => {
     return null;
   }
 });
+
 const profileInputName = document.querySelector(
   "#popup-profile__form-input_name"
 );
+
 const profileInputJob = document.querySelector(
   "#popup-profile__form-input_job"
 );
+
 const pageContainer = document.querySelector(".page__container");
-
-function openPopup(popup) {
-  popup.classList.add("popup_open");
-  document.addEventListener("keydown", closePopupWithEsc);
-  popup.addEventListener("mousedown", closePopupWithOverlay);
-}
-
-function closePopup(popup) {
-  popup.classList.remove("popup_open");
-  document.removeEventListener("keydown", closePopupWithEsc);
-  popup.removeEventListener("mousedown", closePopupWithOverlay);
-}
 
 function openProfilePopup() {
   openPopup(profilePopup);
@@ -60,20 +52,6 @@ function openProfilePopup() {
 
 function closeProfilePopup() {
   closePopup(profilePopup);
-}
-
-function closePopupWithOverlay(event) {
-  if (event.target === event.currentTarget) {
-    closePopup(event.target);
-  }
-}
-
-function closePopupWithEsc(event) {
-  const key = event.key;
-  if (event.key === "Escape") {
-    const popup = document.querySelector(".popup_open");
-    closePopup(popup);
-  }
 }
 
 function handleProfileFormSubmit(evt) {
@@ -90,7 +68,7 @@ profileInfoEditBtn.addEventListener("click", openProfilePopup);
 
 const elementsSection = document.querySelector(".elements");
 const titleInput = document.querySelector("#popup-card__form-input_title");
-const imgurlInput = document.querySelector("#popup-card__form-input_imgurl");
+const imgUrlInput = document.querySelector("#popup-card__form-input_imgurl");
 const newPlaceForm = document.querySelector("#popup-card__form");
 
 initialCards.forEach((data) => {
@@ -104,14 +82,15 @@ function handleFormNewplaceSubmit(event) {
 
   const data = {
     name: titleInput.value,
-    link: imgurlInput.value,
+    link: imgUrlInput.value,
   };
+
   const cardInstance = new Card(data, "#element-template");
   const cardElement = cardInstance.generateCard();
   elementsSection.prepend(cardElement);
 
-  titleInput.value = "";
-  imgurlInput.value = "";
+  titleInput.form.reset();
+  imgUrlInput.form.reset();
   event.target
     .querySelector(".popup__button")
     .classList.add("popup__button_disabled");
@@ -133,12 +112,9 @@ function closeCardPopup() {
 
 profileAddButton.addEventListener("click", openCardPopup);
 
-const newplaceFormInstance = new FormValidator(settingsObj, newPlaceForm);
-newplaceFormInstance.enableValidation();
-const ProfileFormInstance = new FormValidator(settingsObj, profileForm);
-ProfileFormInstance.enableValidation();
+const newPlaceFormInstance = new FormValidator(settingsObject, newPlaceForm);
+newPlaceFormInstance.enableValidation();
+const profileFormInstance = new FormValidator(settingsObject, profileForm);
+profileFormInstance.enableValidation();
 
-export { openPopup };
-export { imagePopUp };
-export { popupImageImage };
-export { popupImageName };
+export { imagePopUp, popupImageImage, popupImageName };
