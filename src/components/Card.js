@@ -1,11 +1,9 @@
-import { openPopup } from "./utils.js";
-import { imagePopUp, popupImageImage, popupImageName } from "./index.js";
-
 export class Card {
-  constructor(data, template) {
+  constructor(data, template, handleCardClick) {
     this._image = data.link;
     this._title = data.name;
     this._template = template;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -29,14 +27,11 @@ export class Card {
 
   _setEventListeners() {
     this.element
-      .querySelector(".heart-button")
-      .addEventListener("click", this._heartButtonClick);
-    this.element
-      .querySelector(".element__delete")
-      .addEventListener("click", this._deleteButtonClick);
+    .querySelector(".heart-button")
+    .addEventListener("click", this._heartButtonClick);
     this.element
       .querySelector(".element__img")
-      .addEventListener("click", this._openImagePopup);
+      .addEventListener("click", () => this._handleCardClick());
   }
 
   _heartButtonClick = () => {
@@ -50,10 +45,4 @@ export class Card {
     this.element = null;
   };
 
-  _openImagePopup = () => {
-    openPopup(imagePopUp);
-    popupImageImage.src = this._image;
-    popupImageImage.alt = this._title;
-    popupImageName.textContent = this._title;
-  };
 }
