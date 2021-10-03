@@ -20,6 +20,7 @@ import {
 
 // generate Dom element from item with link and name and return it
 const cardGenerator = (item) => {
+  console.log(item)
   const cardInstance = new Card(item, "#element-template", () => {
     imageModal.open(item.link, item.name);
   });
@@ -27,38 +28,20 @@ const cardGenerator = (item) => {
   return cardElement;
 };
 
-// modals
-const imageModal = new PopupWithImage(".popup-image");
-const editProfielModal = new PopupWithForm(".popup-profile", (data) => {
-  const userInfoModal = new UserInfo(
+// modals  
+const userInfoModal = new UserInfo(
     ".profile__info-heading",
     ".profile__info-description"
   );
+const imageModal = new PopupWithImage(".popup-image");
+const editProfielModal = new PopupWithForm(".popup-profile", (data) => {
+
   userInfoModal.setUserInfo(
     data["popup-profile-profile-name-input"],
     data["popup-profile-job-input"]
   );
   profileInputName.placeholder = userInfoModal.getUserInfo().name;
   profileInputJob.placeholder = userInfoModal.getUserInfo().job;
-});
-
-const addCardModal = new PopupWithForm(".popup-card", (object) => {
-  const data = [
-    {
-      name: object["popup-card-title-input"],
-      link: object["popup-card-imgurl-input"],
-    },
-  ];
-  const addCardsModal = new Section(
-    {
-      items: data,
-      renderer: (item) => {
-        addCardsModal.prependItem(cardGenerator(item));
-      },
-    },
-    ".elements"
-  );
-  addCardsModal.renderItems();
 });
 
 const initialCardsModal = new Section(
@@ -71,6 +54,16 @@ const initialCardsModal = new Section(
   ".elements"
 );
 initialCardsModal.renderItems();
+
+const addCardModal = new PopupWithForm(".popup-card", (object) => {
+  const data = 
+    {
+      name: object["popup-card-title-input"],
+      link: object["popup-card-imgurl-input"],
+    };
+
+  initialCardsModal.prependItem(cardGenerator(data));
+});
 
 // eventlisteners to the modal
 imageModal.setEventListeners();
