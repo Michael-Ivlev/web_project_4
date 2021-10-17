@@ -54,6 +54,7 @@
 /* heart-button */
 @import url(../blocks/heart-button/heart-button.css);
 @import url(../blocks/heart-button/_active/heart-button_active.css);
+@import url(../blocks/image-likes/image-likes.css);
 /* popup-image*/
 @import url(../blocks/popup-image/popup-image.css);
 @import url(../blocks/popup-image/__name/popup-image__name.css);
@@ -63,3 +64,11 @@
 /* footer */
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/footer/footer.css);
+/* popup delete */
+@import url(../blocks/popup-delete/popup-delete.css);
+@import url(../blocks/popup-delete/__container/popup-delete__container.css);
+@import url(../blocks/popup-delete/__heading/popup-delete__heading.css);
+
+
+
+
