@@ -5,6 +5,7 @@ import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithButton } from "../components/PopupWithButton.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Section } from "../components/Section.js";
 import {
@@ -18,6 +19,12 @@ import {
 } from "../utils/constants.js";
 import { api } from "../components/Api";
 
+// const userId = api.getUserInfo().then((res) => {
+//   return res._id
+// })
+
+// console.log(userId)
+
 // // generate Dom element from item with link and name and return it
 // const cardGenerator = (item) => {
 //   const cardInstance = new Card(item, "#element-template", () => {
@@ -28,11 +35,14 @@ import { api } from "../components/Api";
 // };
 
 // modals
+
 const userInfoModal = new UserInfo(
   ".profile__info-heading",
   ".profile__info-description",
   ".profile__avatar"
 );
+
+// const deleteButtonModal = new PopupWithButton(".popup-delete");
 
 const imageModal = new PopupWithImage(".popup-image");
 
@@ -63,7 +73,7 @@ const addCardModal = new PopupWithForm(".popup-card", (object) => {
       object["popup-card-title-input"],
       object["popup-card-imgurl-input"]
     )
-    .then((res) => {
+    .then(() => {
       location.reload();
     });
 });
@@ -96,6 +106,8 @@ const addCardModal = new PopupWithForm(".popup-card", (object) => {
 // eventlisteners to the modal
 imageModal.setEventListeners();
 
+// deleteButtonModal.setEventListeners();
+
 editProfielModal.setEventListeners();
 
 addCardModal.setEventListeners();
@@ -108,34 +120,79 @@ profileInfoEditBtn.addEventListener("click", () => {
   editProfielModal.open();
 });
 
-
 // inital the profile name and job from server
 api.getUserInfo().then((res) => {
   userInfoModal.setUserInfo(res.name, res.about, res.avatar);
+
+  const cardGenerator = (item) => {
+    const cardInstance = new Card(
+      item,
+      "#element-template",
+      () => {
+        imageModal.open(item.link, item.name);
+      },
+      () => {
+        const deleteButtonModal = new PopupWithButton(".popup-delete", () => {
+          api.removeCard(item._id).then(()=> {
+            location.reload();
+          })
+        });
+        deleteButtonModal.setEventListeners()
+        deleteButtonModal.open();
+      },
+      res._id
+    );
+
+    const cardElement = cardInstance.generateCard();
+    return cardElement;
+  };
+
+  // initial cards from the server
+  api.getInitialCards().then((res) => {
+    const initialCardsModal = new Section(
+      {
+        items: res,
+        renderer: (item) => {
+          initialCardsModal.addItem(cardGenerator(item));
+        },
+      },
+      ".elements"
+    );
+    initialCardsModal.renderItems();
+  });
 });
 
 // generate Dom element from item with link and name and return it
-const cardGenerator = (item) => {
-  const cardInstance = new Card(item, "#element-template", () => {
-    imageModal.open(item.link, item.name);
-  });
-  const cardElement = cardInstance.generateCard();
-  return cardElement;
-};
+// const cardGenerator = (item) => {
+//   const cardInstance = new Card(
+//     item,
+//     "#element-template",
+//     () => {
+//       imageModal.open(item.link, item.name);
+//     },
+//     () => {
+//       deleteButtonModal.open();
+//     },
+//     userId
+//   );
 
-// initial cards from the server
-api.getInitialCards().then((res) => {
-  const initialCardsModal = new Section(
-    {
-      items: res,
-      renderer: (item) => {
-        initialCardsModal.addItem(cardGenerator(item));
-      },
-    },
-    ".elements"
-  );
-  initialCardsModal.renderItems();
-});
+//   const cardElement = cardInstance.generateCard();
+//   return cardElement;
+// };
+
+// // initial cards from the server
+// api.getInitialCards().then((res) => {
+//   const initialCardsModal = new Section(
+//     {
+//       items: res,
+//       renderer: (item) => {
+//         initialCardsModal.addItem(cardGenerator(item));
+//       },
+//     },
+//     ".elements"
+//   );
+//   initialCardsModal.renderItems();
+// });
 
 // const initialCardsModal =
 // new Section(

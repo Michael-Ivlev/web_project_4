@@ -49,6 +49,13 @@ class Api {
       }),
     });
   }
+
+  removeCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this.headers,
+    });
+  }
   // other methods for working with the API
 }
 
