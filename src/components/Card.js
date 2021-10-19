@@ -40,29 +40,16 @@ export class Card {
       this.element.querySelector(".element__delete").style.visibility =
         "visible";
     }
-    // this._likes.forEach((element) => {
-    //   if (element._id === this._userId) {
-    //     this.element
-    //       .querySelector(".heart-button")
-    //       .classList.add("heart-button_active");
-    //     // this.cardLike();
-    //   }
-    // });
+
     if (this.isLiked()) {
       this.element
         .querySelector(".heart-button")
         .classList.add("heart-button_active");
     }
-    // console.log(this._likes.id);
 
-    // if (isLiked) {
-    //   console.log("hey");
-    // }
     this._setEventListeners();
-    console.log(this.isLiked());
     return this.element;
   }
-
 
   cardLike(newLikes) {
     this._likes = newLikes;

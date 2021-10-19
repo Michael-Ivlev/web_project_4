@@ -93,12 +93,6 @@ class Api {
     });
   }
 
-  removeLike(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-      method: "DELETE",
-      headers: this.headers,
-    });
-  }
   // other methods for working with the API
 }
 
