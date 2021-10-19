@@ -36,8 +36,10 @@ export const settingsObject = {
   
 
 export const profileAddButton = document.querySelector(".profile__add-button");
+export const profileAvatarEditButton = document.querySelector(".profile__avatar-overlay");
 export const profileInfoEditBtn = document.querySelector(".profile__info-edit");
 export const profileForm = document.querySelector("#popup-profile__form");
+export const avatarEditForm = document.querySelector("#popup-avataredit__form");
 export const profileInputName = document.querySelector(
   "#popup-profile__form-input_name"
 );

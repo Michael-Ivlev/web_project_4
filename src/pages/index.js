@@ -12,37 +12,29 @@ import {
   profileAddButton,
   profileInfoEditBtn,
   profileForm,
-  profileInputName,
-  profileInputJob,
   newPlaceForm,
   settingsObject,
+  avatarEditForm,
+  profileAvatarEditButton,
 } from "../utils/constants.js";
 import { api } from "../components/Api";
 
-// const userId = api.getUserInfo().then((res) => {
-//   return res._id
-// })
-
-// console.log(userId)
-
-// // generate Dom element from item with link and name and return it
-// const cardGenerator = (item) => {
-//   const cardInstance = new Card(item, "#element-template", () => {
-//     imageModal.open(item.link, item.name);
-//   });
-//   const cardElement = cardInstance.generateCard();
-//   return cardElement;
-// };
-
-// modals
+const editAvatarModal = new PopupWithForm(".popup-avataredit", (data) => {
+  api
+    .setAvatarImage(data["popup-avataredit-profile-link-input"])
+    .then(() => {
+      avatarEditInstance.savingTrigger();
+    })
+    .then(() => {
+      location.reload();
+    });
+});
 
 const userInfoModal = new UserInfo(
   ".profile__info-heading",
   ".profile__info-description",
   ".profile__avatar"
 );
-
-// const deleteButtonModal = new PopupWithButton(".popup-delete");
 
 const imageModal = new PopupWithImage(".popup-image");
 
@@ -52,20 +44,18 @@ const editProfielModal = new PopupWithForm(".popup-profile", (data) => {
     data["popup-profile-job-input"]
   );
 
-  api.getUserInfo().then((res) => {
-    userInfoModal.setUserInfo(res.name, res.about, res.avatar);
-  });
-  // userInfoModal.setUserInfo(
-  //   data["popup-profile-profile-name-input"],
-  //   data["popup-profile-job-input"]
-  // );
-  // profileInputName.placeholder = userInfoModal.getUserInfo().name;
-  // profileInputJob.placeholder = userInfoModal.getUserInfo().job;
+  api
+    .getUserInfo()
+    .then((res) => {
+      userInfoModal.setUserInfo(res.name, res.about, res.avatar);
+    })
+    .then(() => {
+      profileFormInstance.savingTrigger();
+    })
+    .then(() => {
+      location.reload();
+    });
 });
-
-// const deleteImageModal = new PopupWithForm(".popup-delete", (evt) => {
-//   console.log(evt)
-// })
 
 const addCardModal = new PopupWithForm(".popup-card", (object) => {
   api
@@ -74,39 +64,19 @@ const addCardModal = new PopupWithForm(".popup-card", (object) => {
       object["popup-card-imgurl-input"]
     )
     .then(() => {
+      newPlaceFormInstance.savingTrigger();
+    })
+    .then(() => {
       location.reload();
     });
 });
-
-// const addCardModal = new PopupWithForm(".popup-card", (object) => {
-
-//   api.addNewCard(object["popup-card-title-input"], object["popup-card-imgurl-input"])
-//   // .then((res) => {
-//   //   console.log(res)
-//   // })
-//   const data = {
-//     name: object["popup-card-title-input"],
-//     link: object["popup-card-imgurl-input"],
-//   };
-
-//   const newCard = new Section(
-//     {
-//       items: res,
-//       renderer: (item) => {
-//         newCard.addItem(cardGenerator(item));
-//       },
-//     },
-//     ".elements"
-//   );
-//   newCard.renderItems();
-
-//   initialCardsModal.prependItem(cardGenerator(data));
-// });
 
 // eventlisteners to the modal
 imageModal.setEventListeners();
 
 // deleteButtonModal.setEventListeners();
+
+editAvatarModal.setEventListeners();
 
 editProfielModal.setEventListeners();
 
@@ -118,6 +88,10 @@ profileAddButton.addEventListener("click", () => {
 
 profileInfoEditBtn.addEventListener("click", () => {
   editProfielModal.open();
+});
+
+profileAvatarEditButton.addEventListener("click", () => {
+  editAvatarModal.open();
 });
 
 // inital the profile name and job from server
@@ -133,14 +107,27 @@ api.getUserInfo().then((res) => {
       },
       () => {
         const deleteButtonModal = new PopupWithButton(".popup-delete", () => {
-          api.removeCard(item._id).then(()=> {
+          api.removeCard(item._id).then(() => {
             location.reload();
-          })
+          });
         });
-        deleteButtonModal.setEventListeners()
+        deleteButtonModal.setEventListeners();
         deleteButtonModal.open();
       },
-      res._id
+      res._id,
+      () => {
+        const isAleradyLiked = cardInstance.isLiked();
+
+        if (isAleradyLiked) {
+          api.removeLike(item._id).then((res) => {
+            cardInstance.cardDislike(res.likes);
+          });
+        } else {
+          api.addLike(item._id).then((res) => {
+            cardInstance.cardLike(res.likes);
+          });
+        }
+      }
     );
 
     const cardElement = cardInstance.generateCard();
@@ -162,53 +149,12 @@ api.getUserInfo().then((res) => {
   });
 });
 
-// generate Dom element from item with link and name and return it
-// const cardGenerator = (item) => {
-//   const cardInstance = new Card(
-//     item,
-//     "#element-template",
-//     () => {
-//       imageModal.open(item.link, item.name);
-//     },
-//     () => {
-//       deleteButtonModal.open();
-//     },
-//     userId
-//   );
-
-//   const cardElement = cardInstance.generateCard();
-//   return cardElement;
-// };
-
-// // initial cards from the server
-// api.getInitialCards().then((res) => {
-//   const initialCardsModal = new Section(
-//     {
-//       items: res,
-//       renderer: (item) => {
-//         initialCardsModal.addItem(cardGenerator(item));
-//       },
-//     },
-//     ".elements"
-//   );
-//   initialCardsModal.renderItems();
-// });
-
-// const initialCardsModal =
-// new Section(
-//   {
-//     items: initialCards,
-//     renderer: (item) => {
-//       initialCardsModal.addItem(cardGenerator(item));
-//     },
-//   },
-//   ".elements"
-// );
-// initialCardsModal.renderItems();
-
-// add form validators
+// enable form validators
 const newPlaceFormInstance = new FormValidator(settingsObject, newPlaceForm);
 newPlaceFormInstance.enableValidation();
 
 const profileFormInstance = new FormValidator(settingsObject, profileForm);
 profileFormInstance.enableValidation();
+
+const avatarEditInstance = new FormValidator(settingsObject, avatarEditForm);
+avatarEditInstance.enableValidation();

@@ -39,6 +39,16 @@ class Api {
     });
   }
 
+  setAvatarImage(imageUrl) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: `${imageUrl}`,
+      }),
+    });
+  }
+
   addNewCard(imageName, imageLink) {
     return fetch(`${this.baseUrl}/cards`, {
       method: "POST",
@@ -52,6 +62,39 @@ class Api {
 
   removeCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this.headers,
+    });
+  }
+
+  addLike(cardId) {
+    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this.headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      // if the server returns an error, reject the promise
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  removeLike(cardId) {
+    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this.headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      // if the server returns an error, reject the promise
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  removeLike(cardId) {
+    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
     });

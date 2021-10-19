@@ -1,7 +1,14 @@
 import { Popup } from "./Popup.js";
 
 export class Card {
-  constructor(data, template, handleCardClick, handleDeleteClick, userId) {
+  constructor(
+    data,
+    template,
+    handleCardClick,
+    handleDeleteClick,
+    userId,
+    handleLikeClick
+  ) {
     this._image = data.link;
     this._title = data.name;
     this._likes = data.likes;
@@ -10,6 +17,7 @@ export class Card {
     this._imageOwnerId = data.owner._id;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
@@ -32,14 +40,49 @@ export class Card {
       this.element.querySelector(".element__delete").style.visibility =
         "visible";
     }
+    // this._likes.forEach((element) => {
+    //   if (element._id === this._userId) {
+    //     this.element
+    //       .querySelector(".heart-button")
+    //       .classList.add("heart-button_active");
+    //     // this.cardLike();
+    //   }
+    // });
+    if (this.isLiked()) {
+      this.element
+        .querySelector(".heart-button")
+        .classList.add("heart-button_active");
+    }
+    // console.log(this._likes.id);
+
+    // if (isLiked) {
+    //   console.log("hey");
+    // }
     this._setEventListeners();
+    console.log(this.isLiked());
     return this.element;
+  }
+
+
+  cardLike(newLikes) {
+    this._likes = newLikes;
+    this.element.querySelector(".image-likes").textContent = this._likes.length;
+    this.element
+      .querySelector(".heart-button")
+      .classList.add("heart-button_active");
+  }
+
+  cardDislike() {
+    this.element.querySelector(".image-likes").textContent--;
+    this.element
+      .querySelector(".heart-button")
+      .classList.remove("heart-button_active");
   }
 
   _setEventListeners() {
     this.element
       .querySelector(".heart-button")
-      .addEventListener("click", this._heartButtonClick);
+      .addEventListener("click", () => this._handleLikeClick());
     this.element
       .querySelector(".element__img")
       .addEventListener("click", () => this._handleCardClick());
@@ -48,11 +91,7 @@ export class Card {
       .addEventListener("click", () => this._handleDeleteClick());
   }
 
-
-
-  _heartButtonClick = () => {
-    this.element
-      .querySelector(".heart-button")
-      .classList.toggle("heart-button_active");
-  };
+  isLiked() {
+    return this._likes.some((element) => element._id === this._userId);
+  }
 }
