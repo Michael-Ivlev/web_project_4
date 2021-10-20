@@ -25,10 +25,8 @@ const editAvatarModal = new PopupWithForm(".popup-avataredit", (data) => {
     .then(() => {
       userInfoModal.setAvatarImage(data["popup-avataredit-profile-link-input"]);
     })
-    .catch((err) => console.log(`Error: ${err}`))
-    .finally(() => {
-      editAvatarModal.close();
-    });
+    .then(() => editAvatarModal.close())
+    .catch((err) => console.log(`Error: ${err}`));
 });
 
 const userInfoModal = new UserInfo(
@@ -45,39 +43,12 @@ const editProfielModal = new PopupWithForm(".popup-profile", (data) => {
       data["popup-profile-profile-name-input"],
       data["popup-profile-job-input"]
     )
-    .then(() => {
-      api
-        .getUserInfo()
-        .then((res) => {
-          userInfoModal.setUserInfo(res.name, res.about, res.avatar);
-        })
-        .catch((err) => console.log(`Error: ${err}`))
-        .finally(() => editProfielModal.close());
+    .then((res) => {
+      userInfoModal.setUserInfo(res.name, res.about, res.avatar);
     })
+    .then(() => editProfielModal.close())
     .catch((err) => console.log(`Error: ${err}`));
-
-  // api
-  //   .getUserInfo()
-  //   .then((res) => {
-  //     userInfoModal.setUserInfo(res.name, res.about, res.avatar);
-  //   })
-  //   .catch((err) => console.log(`Error: ${err}`))
-  //   .finally(() => editProfielModal.close());
 });
-
-// const addCardModal = new PopupWithForm(".popup-card", (object) => {
-//   api
-//     .addNewCard(
-//       object["popup-card-title-input"],
-//       object["popup-card-imgurl-input"]
-//     )
-//     .then(() => {
-//       newPlaceFormInstance.savingTrigger();
-//     })
-//     .then(() => {
-//       location.reload();
-//     });
-// });
 
 // eventlisteners to the modal
 imageModal.setEventListeners();
@@ -88,20 +59,17 @@ editAvatarModal.setEventListeners();
 
 editProfielModal.setEventListeners();
 
-// addCardModal.setEventListeners();
-
-// profileAddButton.addEventListener("click", () => {
-//   addCardModal.open();
-// });
-
 profileInfoEditBtn.addEventListener("click", () => {
+  const userinfo = userInfoModal.getUserInfo();
   api
-  .getUserInfo()
-  .then((res) => {
-    document.querySelector("#popup-profile__form-input_name").placeholder = res.name
-    document.querySelector("#popup-profile__form-input_job").placeholder = res.about
-  })
-  .catch((err) => console.log(`Error: ${err}`))
+    .getUserInfo()
+    .then((res) => {
+      document.querySelector("#popup-profile__form-input_name").value =
+        userinfo.name;
+      document.querySelector("#popup-profile__form-input_job").value =
+        userinfo.job;
+    })
+    .catch((err) => console.log(`Error: ${err}`));
   editProfielModal.open();
 });
 
@@ -129,10 +97,8 @@ api
               .then(() => {
                 cardInstance.removeCard();
               })
-              .catch((err) => console.log(`Error: ${err}`))
-              .finally(() => {
-                deleteButtonModal.close();
-              });
+              .then(() => deleteButtonModal.close())
+              .catch((err) => console.log(`Error: ${err}`));
           });
           deleteButtonModal.setEventListeners();
           deleteButtonModal.open();
@@ -187,10 +153,8 @@ api
             .then((res) => {
               initialCardsModal.prependItem(cardGenerator(res));
             })
-            .catch((err) => console.log(`Error: ${err}`))
-            .finally(() => {
-              addCardModal.close();
-            });
+            .then(() => addCardModal.close())
+            .catch((err) => console.log(`Error: ${err}`));
         });
         addCardModal.setEventListeners();
 
