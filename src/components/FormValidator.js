@@ -67,12 +67,6 @@ export class FormValidator {
     });
   }
 
-  savingTrigger() {
-    const { submitButtonSelector } = this._settingsObject;
-    const buttonElement = this._formElement.querySelector(submitButtonSelector);
-    buttonElement.textContent = "Saving...";
-  }
-
   _toggleButtonState(inputList, buttonElement) {
     const { inactiveButtonClass } = this._settingsObject;
 

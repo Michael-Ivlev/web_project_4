@@ -81,4 +81,12 @@ export class Card {
   isLiked() {
     return this._likes.some((element) => element._id === this._userId);
   }
+
+  removeCard = () => { 
+
+    this.element.remove(); 
+
+    this.element = null; 
+
+  }; 
 }

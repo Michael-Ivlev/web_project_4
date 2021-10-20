@@ -18,4 +18,8 @@ export class UserInfo {
     this._jobSelector.textContent = newJob;
     this._avatarSelector.src = avatar;
   }
+
+  setAvatarImage(avatarUrl){
+    this._avatarSelector.src = avatarUrl;
+  }
 }
