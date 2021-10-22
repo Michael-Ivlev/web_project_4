@@ -61,15 +61,9 @@ editProfielModal.setEventListeners();
 
 profileInfoEditBtn.addEventListener("click", () => {
   const userinfo = userInfoModal.getUserInfo();
-  api
-    .getUserInfo()
-    .then((res) => {
-      document.querySelector("#popup-profile__form-input_name").value =
-        userinfo.name;
-      document.querySelector("#popup-profile__form-input_job").value =
-        userinfo.job;
-    })
-    .catch((err) => console.log(`Error: ${err}`));
+  document.querySelector("#popup-profile__form-input_name").value =
+    userinfo.name;
+  document.querySelector("#popup-profile__form-input_job").value = userinfo.job;
   editProfielModal.open();
 });
 

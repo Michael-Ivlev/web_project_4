@@ -59,8 +59,9 @@ export class Card {
       .classList.add("heart-button_active");
   }
 
-  cardDislike() {
-    this.element.querySelector(".image-likes").textContent--;
+  cardDislike(likesabout) {
+    console.log(likesabout)
+    this.element.querySelector(".image-likes").textContent = likesabout.length;
     this.element
       .querySelector(".heart-button")
       .classList.remove("heart-button_active");
