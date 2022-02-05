@@ -1,5 +1,6 @@
-# Project 4: Around The U.S.
 
+# Project 4: Around The U.S.
+![enter image description here](https://i.imgur.com/8MEiz9M.png)
 ### Overview
 
 * This project is about traveling around the world
